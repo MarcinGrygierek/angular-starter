@@ -1,5 +1,3 @@
 module.exports = {
-    '*.{ts,scss,html}': [
-        (files) => `ng lint --fix --parallel --files=${files.join(',')}`,
-    ],
+  '*.{ts,scss,html}': [(files) => `ng lint --fix --lint-file-patterns=${files.join(',')}`],
 };
