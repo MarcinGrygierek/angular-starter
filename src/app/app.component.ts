@@ -1,14 +1,23 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { ApiService } from './api.service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  title = 'angular-starter';
-  value = 10;
+export class AppComponent implements OnInit {
+  constructor(
+    private apiService: ApiService,
+    private authService: AuthService,
+  ) {}
+
+  ngOnInit(): void {
+    this.authService.fetchUserData();
+  }
 }
